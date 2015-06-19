@@ -48,6 +48,10 @@ class CacheProviderLoader
             $service->addMethodCall('setNamespace', array($config['namespace']));
         }
 
+        if ($config['life_time_limit']) {
+            $service->addMethodCall('setMaxLifeTime', array($config['life_time_limit']));
+        }
+
         foreach ($config['aliases'] as $alias) {
             $container->setAlias($alias, $serviceId);
         }

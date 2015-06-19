@@ -1,0 +1,8 @@
+doctrine_cache:
+    providers:
+        3600_provider:
+            type: array
+            life_time_limit: 3600
+        60_provider:
+            type: array
+            life_time_limit: 60

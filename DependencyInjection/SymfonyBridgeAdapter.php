@@ -98,6 +98,7 @@ class SymfonyBridgeAdapter
             $type       => array(),
             'type'      => $type,
             'namespace' => null,
+            'life_time_limit' => null,
         );
 
         if ( ! isset($cacheDriver['namespace'])) {
@@ -108,8 +109,12 @@ class SymfonyBridgeAdapter
 
             $cacheDriver['namespace'] = $namespace;
         }
-        
+
         $config['namespace'] = $cacheDriver['namespace'];
+
+        if(isset($cacheDriver['life_time_limit'])) {
+            $config['life_time_limit'] = $cacheDriver['life_time_limit'];
+        }
 
         if (in_array($type, array('memcache', 'memcached'))) {
             $host = !empty($host) ? $host : 'localhost';

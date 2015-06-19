@@ -174,6 +174,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->children()
                             ->scalarNode('namespace')->defaultNull()->end()
+                            ->scalarNode('life_time_limit')->defaultNull()->end()
                             ->scalarNode('type')->defaultNull()->end()
                             ->append($this->addBasicProviderNode('apc'))
                             ->append($this->addBasicProviderNode('array'))

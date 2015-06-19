@@ -207,6 +207,25 @@ abstract class AbstractDoctrineCacheExtensionTest extends TestCase
         }
     }
 
+    public function testBasicLifeTimeLimitCache()
+    {
+        $container = $this->compileContainer('life_time_limited');
+        $drivers   = array(
+            'doctrine_cache.providers.3600_provider' => '3600',
+            'doctrine_cache.providers.60_provider'   => '60',
+        );
+
+        foreach ($drivers as $key => $value) {
+            $this->assertTrue($container->hasDefinition($key));
+
+            $def   = $container->getDefinition($key);
+            $calls = $def->getMethodCalls();
+
+            $this->assertEquals('setMaxLifeTime', $calls[0][0]);
+            $this->assertEquals($value, $calls[0][1][0]);
+        }
+    }
+
     public function testAliasesCache()
     {
         $container = $this->compileContainer('aliased');
